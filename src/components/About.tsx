@@ -1,28 +1,5 @@
-import { site } from "../config/site"
+import { background } from "../config/site"
 import FadeIn from "./FadeIn"
-
-const cards = [
-  {
-    label: "Undergraduate",
-    title: "University of British Columbia",
-    subtitle: "Computer Science",
-  },
-  {
-    label: "Graduate",
-    title: "Columbia University",
-    subtitle: "MS Operations Research",
-  },
-  {
-    label: "Currently",
-    title: "Software Engineer at Avoca",
-    subtitle: "AI agents & enterprise products",
-  },
-  {
-    label: "Location",
-    title: site.location,
-    subtitle: "United States",
-  },
-] as const
 
 export default function About() {
   return (
@@ -38,12 +15,19 @@ export default function About() {
         </FadeIn>
 
         <div className="mt-12 grid gap-4 sm:grid-cols-2">
-          {cards.map((card, i) => (
+          {background.map((card, i) => (
             <FadeIn key={card.label} delay={i * 0.08}>
               <article className="rounded-xl border border-border bg-white p-6 transition-colors hover:border-border-strong">
-                <p className="text-xs font-medium uppercase tracking-wider text-subtle">
-                  {card.label}
-                </p>
+                <div className="flex items-start justify-between gap-4">
+                  <p className="text-xs font-medium uppercase tracking-wider text-subtle">
+                    {card.label}
+                  </p>
+                  {card.period && (
+                    <time className="shrink-0 text-xs text-subtle">
+                      {card.period}
+                    </time>
+                  )}
+                </div>
                 <h3 className="mt-2 text-base font-semibold text-foreground">
                   {card.title}
                 </h3>

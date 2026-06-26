@@ -10,7 +10,7 @@ export default function Projects() {
             Projects
           </h2>
           <p className="mt-3 max-w-lg text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
-            Things I&apos;ve built
+            Things I&apos;m building
           </p>
         </FadeIn>
 
@@ -23,13 +23,21 @@ export default function Projects() {
                 rel="noopener noreferrer"
                 className="group flex h-full flex-col rounded-xl border border-border bg-white p-6 transition-colors hover:border-border-strong hover:bg-gray-50"
               >
-                <div className="flex items-center justify-between">
-                  <h3 className="text-base font-semibold text-foreground transition-colors group-hover:text-accent-hover">
-                    {project.name}
-                  </h3>
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h3 className="text-base font-semibold text-foreground transition-colors group-hover:text-accent-hover">
+                      {project.name}
+                    </h3>
+                    {"status" in project && project.status && (
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-border px-2 py-0.5 text-[11px] font-medium text-muted">
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                        {project.status}
+                      </span>
+                    )}
+                  </div>
                   <span
                     aria-hidden="true"
-                    className="text-subtle transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    className="shrink-0 text-subtle transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                   >
                     ↗
                   </span>
@@ -43,15 +51,6 @@ export default function Projects() {
               </a>
             </FadeIn>
           ))}
-
-          <FadeIn delay={0.16}>
-            <div className="flex h-full flex-col items-center justify-center rounded-xl border border-dashed border-border bg-gray-50/50 p-6 text-center">
-              <p className="text-sm font-medium text-subtle">More coming soon</p>
-              <p className="mt-1 text-xs text-subtle">
-                Placeholder for future projects
-              </p>
-            </div>
-          </FadeIn>
         </div>
       </div>
     </section>
