@@ -5,8 +5,7 @@ export function MillionCat() {
         className="pointer-events-none absolute bottom-full right-0 mb-3 w-44 rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-xs leading-relaxed text-gray-700 opacity-0 shadow-sm transition-all duration-300 ease-out scale-95 group-hover:opacity-100 group-hover:scale-100"
         aria-hidden="true"
       >
-        <p>Hi, i&apos;m Million 🐱</p>
-        <p className="mt-1 text-gray-500">do you like my mom&apos;s website?</p>
+        <p>🐱 Mrrp. I&apos;m Million. Stay a while. 🐾</p>
         <span className="absolute -bottom-1.5 right-6 h-3 w-3 rotate-45 border-b border-r border-gray-200 bg-white" />
       </div>
 
