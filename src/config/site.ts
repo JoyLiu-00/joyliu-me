@@ -66,9 +66,9 @@ export const building = [
         title: "Software Engineer — Product",
         period: "Feb 2026 – Present",
         bullets: [
-          "Architected the integration infrastructure connecting Avoca's AI agent to enterprise CRM ecosystems",
-          "Led delivery of 3+ enterprise platform integrations including Salesforce, AccuLynx, and Dynamics 365",
-          "Developed LLM-powered analytics capabilities including drop-off analysis to surface actionable customer insights",
+          "Led end-to-end CRM integration infrastructure powering Avoca's enterprise AI deployments",
+          "Designed and shipped custom workflows for multi-channel AI agents across voice, calling, and messaging",
+          "Built LLM-powered analytics to surface customer insights",
         ],
       },
       {
@@ -103,6 +103,7 @@ export type PlogPost = {
   image?: string
   images?: string[]
   video?: string
+  likes?: number
 }
 
 export const plogPosts: PlogPost[] = [
@@ -111,11 +112,13 @@ export const plogPosts: PlogPost[] = [
     date: "Jun 25, 2026",
     text: "all bibbed up and ready for dinner. (the ball is not food, million.)",
     video: "/plog/IMG_1030.MOV",
+    likes: 12,
   },
   {
     id: "million-camera",
     date: "Jun 25, 2026",
     text: "new camera's first model. he charged nothing.",
     images: ["/plog/DSCF0311.JPG", "/plog/IMG_8198.JPG"],
+    likes: 15,
   },
 ]

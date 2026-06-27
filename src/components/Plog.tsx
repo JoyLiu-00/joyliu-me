@@ -10,24 +10,38 @@ function readLiked(postId: string) {
   }
 }
 
-function writeLiked(postId: string, liked: boolean) {
+function readLikeCount(postId: string, seed = 0) {
+  try {
+    const stored = localStorage.getItem(`plog-like-count-${postId}`)
+    if (stored !== null) return Math.max(0, Number.parseInt(stored, 10) || 0)
+  } catch {
+    // ignore storage errors
+  }
+  return seed
+}
+
+function writeLikeState(postId: string, liked: boolean, count: number) {
   try {
     localStorage.setItem(`plog-like-${postId}`, String(liked))
+    localStorage.setItem(`plog-like-count-${postId}`, String(count))
   } catch {
     // ignore storage errors
   }
 }
 
-function LikeButton({ postId }: { postId: string }) {
+function LikeButton({ postId, seed = 0 }: { postId: string; seed?: number }) {
   const [liked, setLiked] = useState(() => readLiked(postId))
+  const [count, setCount] = useState(() => readLikeCount(postId, seed))
 
   return (
     <button
       type="button"
       onClick={() => {
-        const next = !liked
-        setLiked(next)
-        writeLiked(postId, next)
+        const nextLiked = !liked
+        const nextCount = nextLiked ? count + 1 : Math.max(0, count - 1)
+        setLiked(nextLiked)
+        setCount(nextCount)
+        writeLikeState(postId, nextLiked, nextCount)
       }}
       className={`inline-flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
         liked
@@ -35,6 +49,7 @@ function LikeButton({ postId }: { postId: string }) {
           : "border-border text-muted hover:border-border-strong hover:bg-gray-50 hover:text-foreground"
       }`}
       aria-pressed={liked}
+      aria-label={liked ? `${count} likes, liked` : `${count} likes, like this post`}
     >
       <svg
         width="14"
@@ -47,7 +62,7 @@ function LikeButton({ postId }: { postId: string }) {
       >
         <path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.5-7 10-7 10Z" />
       </svg>
-      {liked ? "Liked" : "Like"}
+      <span>{count}</span>
     </button>
   )
 }
@@ -144,7 +159,7 @@ function PlogCard({ post, index }: { post: PlogPost; index: number }) {
             <time className="text-xs font-medium uppercase tracking-wider text-subtle">
               {post.date}
             </time>
-            <LikeButton postId={post.id} />
+            <LikeButton postId={post.id} seed={post.likes ?? 0} />
           </div>
           <p className="mt-2 line-clamp-4 text-sm leading-relaxed text-muted">
             {post.text}
